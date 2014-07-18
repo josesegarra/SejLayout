@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="sej_layouts.js"></script>
+
+    <style type="text/css" >
+        
+        body { margin: 0; }
+        .row { position: absolute; left: 5px; right: 5px;}
+        .header.row { height: 70px; top: 5px; border-bottom: 1px solid #808080;}
+        .body.row   { top: 80px; bottom: 55px; }
+        .footer.row { height: 45px;bottom: 5px;border-top: 1px solid #808080;
+        }
+
+        .splitH { border-right: 1px solid #808080; margin: 5px;}
+        .splitV { border-bottom: 1px solid #808080; margin: 5px;}
+        .split_hover    { background: #94b1ee}
+
+        .content { overflow-y: auto}
+
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            sej_layouts.init();
+            var l=sej_layouts.AddHLayout(document.getElementById("main_body"), "main_layout", "20%");
+            l.split.addClass("splitH");
+            l.split.hover(function () { $(this).addClass('split_hover') }, function () { $(this).removeClass('split_hover') });
+            l.Update();
+            l.prev.html("This is left panel");
+
+            var l = sej_layouts.AddVLayout(l.next.get(0), "column", "40%");
+            l.split.addClass("splitV");
+            l.split.hover(function () { $(this).addClass('split_hover') }, function () { $(this).removeClass('split_hover') });
+            l.prev.addClass("content");
+            l.Update();
+            for (var i = 0; i < 30;i++) l.prev.append(i+": This is main top panel<br>");
+            l.next.html("This is main bottom panel");
+
+        });
+    </script>
+    
+
+    </head>
+        <body>
+            <div class="header row" id="header">Header</div>
+            <div class="body row " id="main_body"></div>
+            <div class="footer row" id="footer">Footer</div>
+        </body>
+        </html>
